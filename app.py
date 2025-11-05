@@ -3,8 +3,8 @@ import pandas as pd
 from datetime import datetime
 
 # Default coordinates (Stockholm)
-latitude = 59.309965
-longitude = 18.021515
+latitude = 59.3293
+longitude = 18.0686
 
 
 # ========== SMHI ==========
@@ -51,13 +51,3 @@ def collect_smhi_data(lat=latitude, lon=longitude):
     df = pd.DataFrame(forecast_data_smhi)
     df.to_excel("smhi_weather_forecast_72h.xlsx", index=False)
     return df, "Success"
-
-
-# ========== File Loaders ==========
-def load_saved_data(provider: str):
-    """Load previously saved forecast data from Excel."""
-    try:
-        if provider.lower() == "smhi":
-            return pd.read_excel("smhi_weather_forecast_72h.xlsx")
-    except FileNotFoundError:
-        return None

@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from app import collect_smhi_data, load_saved_data
+from app import collect_smhi_data
 
 st.set_page_config(page_title="SMHI Weather Forecast", page_icon="🌦️", layout="wide")
 st.title("🌦️ SMHI Weather Forecast Dashboard")
@@ -26,16 +26,9 @@ city_names = [c[0] for c in cities]
 selected_city = st.sidebar.selectbox("Välj stad (topp 10)", city_names, index=0)
 
 city_lat, city_lon = next((lat, lon) for name, lat, lon in cities if name == selected_city)
-st.sidebar.caption(f"Koordinater för **{selected_city}**: {city_lat:.6f}, {city_lon:.6f}")
 
-use_custom = st.sidebar.checkbox("Ange egna koordinater")
-
-if use_custom:
-    latitude = st.sidebar.number_input("Latitude", value=city_lat, format="%.6f")
-    longitude = st.sidebar.number_input("Longitude", value=city_lon, format="%.6f")
-else:
-    latitude = city_lat
-    longitude = city_lon
+latitude = city_lat
+longitude = city_lon
 
 with st.spinner("Hämtar prognos från SMHI..."):
     df_smhi, msg = collect_smhi_data(lat=latitude, lon=longitude)
