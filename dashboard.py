@@ -36,7 +36,7 @@ with st.spinner("Hämtar prognos från SMHI..."):
     df_smhi, msg = collect_smhi_data(lat=latitude, lon=longitude)
 
 if df_smhi is not None:
-    st.success(f"✅ Prognos hämtad för {selected_city} ({latitude:.4f}, {longitude:.4f})")
+    st.success(f" Prognos hämtad för {selected_city} ({latitude:.4f}, {longitude:.4f})")
     st.dataframe(df_smhi, width="stretch")
 else:
     st.error(msg)
