@@ -123,7 +123,7 @@ jobs:
         run: echo "Image pushed successfully"
 
   deploy:
-    name: Deploy to Azure (Simulerad/mocked)
+    name: Deploy to Azure (Simulated/mocked)
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -133,13 +133,16 @@ jobs:
         uses: actions/checkout@v4
   
       - name: Simulated deploy log
+        shell: bash
         run: |
           echo "======== SIMULERAD DEPLOY ========"
           echo "Docker image: milousanden/auto-devops-msl3:latest"
           echo "Azure App: smhi-webbapp-msl"
           echo "URL: https://smhi-webbapp-msl-bnh4e5cdgcanc7ah.germanywestcentral-01.azurewebsites.net"
-          echo "Deploy cannot complete automatically due to Azure Student authentication limits."
+          echo "--------------------------------------------------"
+          echo "Detta steg simulerar deployment da Azure Student"
+          echo "konto inte har behorighet till Service Principal eller"
+          echo "Basic Authentication."
+          echo "--------------------------------------------------"
           echo "Simulating successful deployment step..."
-    
-          - name: Deployment complete
-            run: echo "App deployed successfully!"
+          echo "DEPLOYMENT SUCCESSFULLY SIMULATED"
